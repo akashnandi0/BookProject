@@ -1,15 +1,33 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <div class="container">
+{% extends 'base_layout2.html' %}
+{% block title %}
+
+WELCOME USER
+
+{% endblock %}
+{% block stylecontent %}
+    <style>
+        .foot {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+        }
+         h2 {
+            border-bottom: 1px solid;
+            display: block;
+            font-size: 50;
+            font-weight: bold;
+            font-family:franklin gothic medium;
+            color:black;
+        }
+    </style>
+{% endblock %}
+{% block bodycontent %}
+    <div class="container text-center">
         <form class="form-control" action="/accounts/login/" method="post">
             {% csrf_token %}
             <h2>Login</h2>
-
+            <br>
             {{ form.as_p }}
 
             <br>
@@ -20,11 +38,9 @@
             </button>
             <br> <br>
         </form>
-         <small class="row">
+        <small class="row">
              <a href="{% url 'password_reset' %}" class="col text-left"><button class="btn btn-primary" style="font-size:12px;height:30px;width:150px">Forgot password?</button></a>
              <a href="{% url 'signup' %}"><button class="btn btn-primary" style="font-size:12px;height:30px;width:150px">Create New Account</button></a>
-         </small>
-    <a href="{% url 'myhome' %}"><button class="btn btn-primary" style="font-size:12px;height:30px;width:150px">Home</button></a>
+        </small>
     </div>
-</body>
-</html>
+{% endblock %}

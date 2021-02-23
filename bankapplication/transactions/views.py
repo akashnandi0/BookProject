@@ -1,10 +1,14 @@
 from django.shortcuts import render, redirect
+
+from bankapplication.settings import LOGIN_REDIRECT_URL
 from profiles.models import accountInfoModel, createProfileModel
 from django.contrib import messages
 # Create your views here.
 from transactions.forms import TransferAmountForm, DepositAmountForm, WithdrawAmountForm, BalanceCheckForm
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def transferamount(request):
     form = TransferAmountForm()
     context = {}
@@ -39,6 +43,7 @@ def transferamount(request):
     return render(request, "transactions/transferamount.html", context)
 
 
+@login_required
 def depositamount(request):
     form = DepositAmountForm()
     context = {}
@@ -70,6 +75,7 @@ def depositamount(request):
     return render(request, "transactions/depositwithdraw.html", context)
 
 
+@login_required
 def withdrawamount(request):
     form = WithdrawAmountForm()
     context = {}
@@ -103,6 +109,7 @@ def withdrawamount(request):
     return render(request, "transactions/depositwithdraw.html", context)
 
 
+@login_required
 def balance(request):
     form = BalanceCheckForm()
     context = {}
@@ -123,3 +130,4 @@ def balance(request):
                 return render(request, "transactions/checkbalance.html", context)
 
     return render(request, "transactions/checkbalance.html", context)
+

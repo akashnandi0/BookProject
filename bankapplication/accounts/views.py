@@ -1,5 +1,7 @@
 import self as self
 from django.contrib import messages, auth
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.exceptions import ValidationError
@@ -65,7 +67,7 @@ class LoginView(LoginView):
         )
 
 
-class HomeView(View):
+class HomeView(LoginRequiredMixin, View):
     template_name = 'accounts/welcomeuser.html'
     # template_name = 'base_layout2.html'
 
@@ -81,12 +83,12 @@ class HomeView(View):
         return render(request, 'accounts/welcomeuser.html', context)
         # return render(request, 'base_layout2.html', context)
 
-
+@login_required
 def userpage(request):
     template = loader.get_template("accounts/welcomeuser.html")
     return HttpResponse(template.render({}, request))
 
-
+@login_required
 def logout(request):
     auth.logout(request)
     return render(request, 'accounts/logout.html')

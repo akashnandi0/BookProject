@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, DetailView, DeleteView
+from django.views.generic import CreateView, DetailView, DeleteView, ListView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
@@ -10,6 +10,8 @@ from profiles.models import createProfileModel, accountInfoModel
 from django.contrib import messages, auth
 import random
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from transactions.models import Transferdetails
 
 
 class CreateProfile(LoginRequiredMixin, CreateView):
@@ -88,7 +90,7 @@ def genpin():
     # return a 4 digit random number
     return int(random.uniform(1000, 9999))
 
-
+@login_required
 def accountsettings(request):
     return render(request, "profiles/accountsettings.html")
 
@@ -110,5 +112,14 @@ def generateaccno(request):
     return render(request, "profiles/generatesuccess.html", {"curr_user": curr_user})
 
 
+@login_required
 def transactions(request):
     return render(request, "profiles/transactions.html")
+
+
+class AccountActivity(ListView):
+    model=Transferdetails
+    template_name = "profiles/accountactivity.html"
+    def query_set(self):
+        mpin=accountInfoModel.objects.get(username=self.request.user).mpin
+        return self.model.objects.filter(mpin=mpin)

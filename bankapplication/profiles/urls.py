@@ -1,6 +1,6 @@
 from django.urls import path
 from profiles.views import accountsettings
-from profiles.views import CreateProfile,success,UpdateprofileView,Deleteprofile,ViewaccountView, ViewprofileView,ViewProfile,change_password, generateaccno, transactions
+from profiles.views import CreateProfile,success,UpdateprofileView,Deleteprofile,ViewaccountView, ViewprofileView,ViewProfile,change_password, generateaccno, transactions, AccountActivity
 
 urlpatterns = [
     path("createprofile/",CreateProfile.as_view(),name="createprofile"),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('changepassword/', change_password, name='change_password'),
     path('accountsettings/',accountsettings,name='accountsettings'),
     path('generateaccno/',generateaccno,name='generateaccno'),
-    path('transactions/',transactions,name='transactions')
+    path('transactions/',transactions,name='transactions'),
+    path('accountactivity/',AccountActivity.as_view(),name='accountactivity')
 ]

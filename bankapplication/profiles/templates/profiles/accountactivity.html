@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>activity</title>
+</head>
+<body>
+{%for i in object_list%}
+Transferred to Accno :{{i.account_number}}<br>
+Transferred Amount : {{i.amount}}<br>
+<hr>
+{%endfor%}
+<a href="{% url 'welcomeuser' %}"><button class="btn btn-primary" style="font-size:12px;height:30px;width:150px">Back to Home</button></a>
+</body>
+</html>

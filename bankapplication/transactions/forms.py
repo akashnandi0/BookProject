@@ -13,6 +13,9 @@ class TransferAmountForm(ModelForm):
             "mpin": "Enter Unique Pin(mpin)",
             "account_number":"Enter Destination Account Number"
         }
+        widgets = {
+            "mpin": forms.PasswordInput()
+        }
     def clean(self):
         cleaned_data = super().clean()
         account_number = cleaned_data.get("account_number")
@@ -48,6 +51,9 @@ class WithdrawAmountForm(ModelForm):
             "amount": "Enter Amount: ",
             "mpin" : "Enter Unique Pin(mpin): "
         }
+        widgets = {
+            "mpin": forms.PasswordInput()
+        }
 
     def clean(self):
         cleaned_data = super().clean()
@@ -78,6 +84,9 @@ class DepositAmountForm(ModelForm):
             "amount": "Enter Amount: ",
             "mpin": "Enter Unique Pin(mpin): "
         }
+        widgets = {
+            "mpin": forms.PasswordInput()
+        }
 
     def clean(self):
         cleaned_data = super().clean()
@@ -104,6 +113,9 @@ class BalanceCheckForm(ModelForm):
         fields = ["mpin"]
         labels = {
             "mpin": "Enter Unique Pin(mpin): "
+        }
+        widgets = {
+            "mpin": forms.PasswordInput()
         }
 
     def clean(self):
